@@ -1,0 +1,40 @@
+{
+  "name": "mybatis-cli",
+  "version": "1.0.0",
+  "description": "mybatis entity、mapper、xml generate tool",
+  "main": "bin/index.js",
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "bin": {
+    "mybatis-cli": "bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucaswangdev/mybatis-cli.git"
+  },
+  "keywords": [
+    "generate",
+    "mybatis",
+    "entity、mapper、xml"
+  ],
+  "author": "lucaswangdev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucaswangdev/mybatis-cli/issues"
+  },
+  "homepage": "https://github.com/lucaswangdev/mybatis-cli#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "figlet": "^1.5.2",
+    "fs-extra": "^11.1.0",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.3"
+  }
+}

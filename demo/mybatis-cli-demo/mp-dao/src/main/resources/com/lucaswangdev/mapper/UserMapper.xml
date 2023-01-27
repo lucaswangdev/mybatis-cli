@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lucaswangdev.mapper.UserMapper">
+    <sql id="TableName">
+        user
+    </sql>
+
+    <sql id="BaseColumnList">
+     `id`, `user_name`, `sex`, `address`
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.lucaswangdev.entity.User" autoMapping="false">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="user.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `id`,
+            `user_name`,
+            `sex`,
+            `address`,
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{user.id,jdbcType=INTEGER},
+            #{user.userName,jdbcType=VARCHAR},
+            #{user.sex,jdbcType=VARCHAR},
+            #{user.address,jdbcType=VARCHAR},
+
+        </trim>
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="user.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user.id != null">
+                `id`,
+            </if>
+            <if test="user.userName != null">
+                `user_name`,
+            </if>
+            <if test="user.sex != null">
+                `sex`,
+            </if>
+            <if test="user.address != null">
+                `address`,
+            </if>
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            <if test="user.id != null">
+                #{user.id,jdbcType=INTEGER},
+            </if>
+            <if test="user.userName != null">
+                #{user.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="user.sex != null">
+                #{user.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="user.address != null">
+                #{user.address,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey">
+        DELETE from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            `user_name` = #{user.userName,jdbcType=VARCHAR},
+            `sex` = #{user.sex,jdbcType=VARCHAR},
+            `address` = #{user.address,jdbcType=VARCHAR},
+        </trim>
+        where
+            `id` = #{user.id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            <if test="user.userName != null">
+                `user_name` = #{user.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="user.sex != null">
+                `sex` = #{user.sex,jdbcType=VARCHAR},
+            </if>
+            <if test="user.address != null">
+                `address` = #{user.address,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        where
+            `id` = #{user.id}
+    </update>
+
+<!-- The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. -->
+    <select id="query" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where
+        `id` = #{id}
+    </select>
+
+    <delete id="delete">
+        DELETE from
+        <include refid="TableName"/>
+        where
+        `id` = #{id}
+    </delete>
+
+    <!--通过地址查询用户    -->
+    <select id="queryByAddress" resultType="com.lucaswangdev.entity.User">
+        select
+        <include refid="BaseColumnList" />
+        from
+        <include refid="TableName" />
+        where `address` = #{user.address} ORDER BY `id` DESC
+    </select>
+</mapper>
