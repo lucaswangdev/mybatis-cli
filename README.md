@@ -1,32 +1,51 @@
 # mybatis-cli
 
-## mybatis-cli 安装
+[中文说明/Chinese Documentation](README_CN.md)
+
+## install
+
+With [npm](https://www.npmjs.com/) do:
 
 ```
 npm i mybatis-cli -g
 ```
 
+## usage
+```
+                      _               _     _                        _   _
+  _ __ ___    _   _  | |__     __ _  | |_  (_)  ___            ___  | | (_)
+ | '_ ` _ \  | | | | | '_ \   / _` | | __| | | / __|  _____   / __| | | | |
+ | | | | | | | |_| | | |_) | | (_| | | |_  | | \__ \ |_____| | (__  | | | |
+ |_| |_| |_|  \__, | |_.__/   \__,_|  \__| |_| |___/          \___| |_| |_|
+              |___/
+mybatis-cli <cmd> [args]
 
+command:
+  mybatis-cli i  init generate mybatis entity、mapper、xml
+  mybatis-cli g  update mybatis entity、mapper、xml update
 
-## mybatis-cli 使用
+options:
+  --version  show version number                                               
+  --help     show help information                                               
+```
 
-1、mybatis-cli 初始化配置。
+### 1. Mybatis-cli initialization configuration.
 
 ```
-# 新建并进入 mybatis-cli-test 文件夹
+# Create and enter the mybatis-cli-test folder
 mkdir mybatis-cli-test && cd mybatis-cli-test
 
-# mybatis-cli 初始化
+# mybatis-cli initialization
 mybatis-cli i
 ```
 
 ![1-init](src/static/1-init.png)
 
-2、配置数据库。
+### 2. Configure the database.
 
 ![1-init](src/static/2-init.png)
 
-3、生成Entity、Mappper、xml。
+### 3. Generate Entity, Mapper, xml.
 
 ```
 mybatis-cli g
@@ -34,9 +53,9 @@ mybatis-cli g
 
 ![1-init](src/static/3-init.png)
 
-4、Entity、Mappper、xml新增部分写在下面 "The above part of the comment..." 下面。
+### 4. The new part of Entity, Mapper, and xml is written below "The above part of the comment..." below.
 
 ![1-init](src/static/4-init.png)
 
-5、如果数据库字段有更新，在相应文件夹下再次执行 "mybatis-cli g" 命令。
+### 5. If the database fields are updated, execute the "mybatis-cli g" command again in the corresponding folder.
 
