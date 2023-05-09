@@ -10,6 +10,7 @@ With [npm](https://www.npmjs.com/) do:
 npm i mybatis-cli -g
 ```
 
+
 ## usage
 ```
                       _               _     _                        _   _
