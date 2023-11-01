@@ -181,7 +181,7 @@ yargs
   .usage('$0 <cmd> [args]')
   .command(
     'i',
-    'init generate mybatis entity、mapper、xml',
+    'mybatis-cli init, generate config file',
     (yargs) => {},
     function (argv) {
       init();
@@ -189,7 +189,7 @@ yargs
   )
   .command(
     'g',
-    'update mybatis entity、mapper、xml update',
+    'generate and update mybatis entity、mapper、xml update',
     (yargs) => {},
     function (argv) {
       generate();
