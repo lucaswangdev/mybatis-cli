@@ -22,8 +22,8 @@ npm i mybatis-cli -g
 mybatis-cli <cmd> [args]
 
 command:
-  mybatis-cli i  init generate mybatis entity、mapper、xml
-  mybatis-cli g  update mybatis entity、mapper、xml update
+  mybatis-cli i  mybatis-cli init, generate config file
+  mybatis-cli g  generate and update mybatis entity、mapper、xml update
 
 options:
   --version  show version number                                               

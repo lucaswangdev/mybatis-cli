@@ -18,8 +18,8 @@ npm i mybatis-cli -g
 mybatis-cli <cmd> [args]
 
 命令：
-  mybatis-cli i  初始化生成 mybatis entity、mapper、xml
-  mybatis-cli g  更新 mybatis entity、mapper、xml
+  mybatis-cli i  初始化，生成配置文件
+  mybatis-cli g  生成并更新 mybatis entity、mapper、xml文件
 
 选项：
   --version  显示版本号                                                   
