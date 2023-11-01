@@ -1,6 +1,6 @@
 {
   "name": "mybatis-cli",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "mybatis entity、mapper、xml generate tool",
   "main": "bin/index.js",
   "files": [
