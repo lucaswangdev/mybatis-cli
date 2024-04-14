@@ -10,22 +10,22 @@ import lombok.Data;
 public class User {
 
     /**
-    * 
+    * 主键
     * type INT
     */
     private Integer id;
     /**
-    * 
+    * 用户名
     * type VARCHAR
     */
     private String userName;
     /**
-    * 
+    * 性别
     * type VARCHAR
     */
     private String sex;
     /**
-    * 
+    * 地址
     * type VARCHAR
     */
     private String address;

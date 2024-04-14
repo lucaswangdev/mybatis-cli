@@ -154,9 +154,25 @@ async function init() {
 }
 
 /**
- * generate 生成mybatis entity、mapper、xml
+ * 生成 mybatis entity、mapper、xml
  */
 async function generate() {
+	try {
+		const globalNodeModulesPathObj = await exec('npm root -g') || {};
+		const globalNodeModulesPath = globalNodeModulesPathObj.stdout.replace('\n', '');
+		const globalJasmineBinPath = path.join(globalNodeModulesPath, 'mybatis-cli/src/jasmine-bin/bin/jasmine');
+		// 生成mybatis相关文件
+		await exec(`${globalJasmineBinPath} ${process.cwd()}/jasmine.properties`);
+		console.log('mybatis-cli generate success');
+	} catch (error) {
+		console.log("mybatis-cli generate error: " + error);
+	}
+}
+
+/**
+ * 生成并更新 mybatis entity、mapper、xml
+ */
+async function generateAndUpdate() {
 	try {
 		const globalNodeModulesPathObj = await exec('npm root -g') || {};
 		const globalNodeModulesPath = globalNodeModulesPathObj.stdout.replace('\n', '');
@@ -189,10 +205,18 @@ yargs
   )
   .command(
     'g',
-    'generate and update mybatis entity、mapper、xml update',
+    'generate mybatis entity、mapper、xml',
     (yargs) => {},
     function (argv) {
       generate();
+    }
+  )
+  .command(
+    'u',
+    'generate and update mybatis entity、mapper、xml',
+    (yargs) => {},
+    function (argv) {
+      generateAndUpdate();
     }
   )
   .help().argv;

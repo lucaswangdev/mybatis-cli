@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 27/01/2023 21:44:36
+ Date: 14/04/2024 13:04:57
 */
 
 SET NAMES utf8mb4;
@@ -22,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(100) DEFAULT NULL,
-  `sex` varchar(1) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_name` varchar(100) DEFAULT NULL COMMENT '用户名',
+  `sex` varchar(1) DEFAULT NULL COMMENT '性别',
+  `address` varchar(100) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 

@@ -19,7 +19,8 @@ mybatis-cli <cmd> [args]
 
 命令：
   mybatis-cli i  初始化，生成配置文件
-  mybatis-cli g  生成并更新 mybatis entity、mapper、xml文件
+  mybatis-cli g  生成 mybatis entity、mapper、xml文件
+  mybatis-cli u  生成并更新 mybatis entity、mapper、xml文件
 
 选项：
   --version  显示版本号                                                   
@@ -53,5 +54,5 @@ mybatis-cli g
 
 ![1-init](src/static/4-init.png)
 
-### 5、如果数据库字段有更新，在相应文件夹下再次执行 "mybatis-cli g" 命令。
+### 5、如果数据库字段有更新，在相应文件夹下再次执行 "mybatis-cli u" 命令。
 

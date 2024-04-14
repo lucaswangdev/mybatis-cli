@@ -23,7 +23,8 @@ mybatis-cli <cmd> [args]
 
 command:
   mybatis-cli i  mybatis-cli init, generate config file
-  mybatis-cli g  generate and update mybatis entity、mapper、xml update
+  mybatis-cli g  generate mybatis entity、mapper、xml
+  mybatis-cli u  generate and update mybatis entity、mapper、xml
 
 options:
   --version  show version number                                               
@@ -58,5 +59,5 @@ mybatis-cli g
 
 ![1-init](src/static/4-init.png)
 
-### 5. If the database fields are updated, execute the "mybatis-cli g" command again in the corresponding folder.
+### 5. If the database fields are updated, execute the "mybatis-cli u" command again in the corresponding folder.
 
