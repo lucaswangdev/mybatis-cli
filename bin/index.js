@@ -40,11 +40,28 @@ function copyDirFile(filePath) {
 			const fileNameArray = _fileName.split(".");
 			const filePrefix = fileNameArray[0];
 			const fileSuffix = `.${fileNameArray[1]}`;
+			let splitStr;
 			// 排除掉 .DS_Store 这个文件
 			if (fileSuffix !== ".DS_Store") {
-				const destPath = `${_dirName}/${filePrefix}Copy${fileSuffix}`;
-				fs.copyFile(filedir, destPath, (err) => {});
-				pathObj[filedir] = destPath;
+				if (fileSuffix === ".java") {
+					splitStr = "/** The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. */";
+					const data1 = fs.readFileSync(filedir, "utf-8");
+					const str1 = data1.toString();
+					if (str1.includes(splitStr)){
+						const destPath = `${_dirName}/${filePrefix}Copy${fileSuffix}`;
+						fs.copyFile(filedir, destPath, (err) => {});
+						pathObj[filedir] = destPath;
+					}
+				} else if (fileSuffix === ".xml") {
+					splitStr = "<!-- The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. -->";
+					const data1 = fs.readFileSync(filedir, "utf-8");
+					const str1 = data1.toString();
+					if (str1.includes(splitStr)){
+						const destPath = `${_dirName}/${filePrefix}Copy${fileSuffix}`;
+						fs.copyFile(filedir, destPath, (err) => {});
+						pathObj[filedir] = destPath;
+					}
+				}
 			}
 		}
 		if (isDir) {

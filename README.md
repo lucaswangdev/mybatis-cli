@@ -60,4 +60,6 @@ mybatis-cli g
 ![1-init](src/static/4-init.png)
 
 ### 5. If the database fields are updated, execute the "mybatis-cli u" command again in the corresponding folder.
-
+```
+mybatis-cli u
+```

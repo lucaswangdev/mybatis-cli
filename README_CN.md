@@ -55,4 +55,6 @@ mybatis-cli g
 ![1-init](src/static/4-init.png)
 
 ### 5、如果数据库字段有更新，在相应文件夹下再次执行 "mybatis-cli u" 命令。
-
+```
+mybatis-cli u
+```
