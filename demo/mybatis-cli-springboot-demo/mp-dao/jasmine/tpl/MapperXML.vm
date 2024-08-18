@@ -31,7 +31,6 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
 #foreach($column in $model.table.columns)
             `${column.name}`,
 #end
-
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
 #foreach($column in $model.table.columns)##
@@ -41,12 +40,12 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
 ###if($column.name == 'create_time' || $column.name == 'update_time')
 ##            now(),
 ###end
-    #if($column.name != 'gmt_create' && $column.name != 'gmt_modified')
-        #{#name(${model.table.className}).${column.fieldName},jdbcType=${column.jdbcType}},
-    #end
-    #if($column.name == 'gmt_create' || $column.name == 'gmt_modified')
-        now(),
-    #end
+#if($column.name != 'gmt_create' && $column.name != 'gmt_modified')
+            #{#name(${model.table.className}).${column.fieldName},jdbcType=${column.jdbcType}},
+#end
+#if($column.name == 'gmt_create' || $column.name == 'gmt_modified')
+            now(),
+#end
 #end
         </trim>
     </insert>
@@ -65,7 +64,6 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
             `${column.name}`,
 #end
 #end
-
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
 #foreach($column in $model.table.columns)##
@@ -78,7 +76,6 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
             now(),
 #end
 #end
-
         </trim>
     </insert>
 
@@ -89,7 +86,6 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
 #foreach($column in $model.table.columns)
             `${column.name}`,
 #end
-
         </trim>
         values
         <foreach collection="list" item="item" separator =",">
@@ -102,10 +98,10 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
 ##                now(),
 ###end
 #if($column.name != 'gmt_create' && $column.name != 'gmt_modified')
-    #{item.${column.fieldName},jdbcType=${column.jdbcType}},
+                #{item.${column.fieldName},jdbcType=${column.jdbcType}},
 #end
 #if($column.name == 'gmt_create' || $column.name == 'gmt_modified')
-            now(),
+                now(),
 #end
 #end
             </trim>
@@ -227,7 +223,7 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
 #end
     </sql>
     <select id="selectCount" resultType="java.lang.Integer">
-        select count(1) from
+        select count(*) from
         <include refid="TableName"/>
         where 1 = 1
         <include refid="page_select_sql" />
@@ -239,7 +235,6 @@ ${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
         <include refid="TableName"/>
         where 1 = 1
         <include refid="page_select_sql" />
-
         <if test="pageable.sort != null">
             order by
             <foreach collection="pageable.sort" item="order" separator=",">

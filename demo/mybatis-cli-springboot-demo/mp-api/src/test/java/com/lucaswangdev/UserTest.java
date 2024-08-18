@@ -116,7 +116,8 @@ public class UserTest {
         // 设置需要查询的条件，例如 user.setUserName("Lucas");
 
         // 创建分页对象，注意 page 是从 0 开始的
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("id").descending());
+        // Pageable pageable = PageRequest.of(0, 10, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.desc("gmt_create"), Sort.Order.desc("id")));
         List<User> users = userMapper.selectPage(user, pageable);
         Assert.assertNotNull(users);
         Assert.assertTrue(users.size() >= 0);

@@ -28,16 +28,15 @@
             `user_name`,
             `sex`,
             `address`,
-
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
             #{user.id,jdbcType=BIGINT},
-                        now(),
-                    now(),
-                #{user.userName,jdbcType=VARCHAR},
-                    #{user.sex,jdbcType=VARCHAR},
-                    #{user.address,jdbcType=VARCHAR},
-                </trim>
+            now(),
+            now(),
+            #{user.userName,jdbcType=VARCHAR},
+            #{user.sex,jdbcType=VARCHAR},
+            #{user.address,jdbcType=VARCHAR},
+        </trim>
     </insert>
 
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="user.id">
@@ -62,7 +61,6 @@
             <if test="user.address != null">
                 `address`,
             </if>
-
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
             <if test="user.id != null">
@@ -83,7 +81,6 @@
             <if test="user.address != null">
                 #{user.address,jdbcType=VARCHAR},
             </if>
-
         </trim>
     </insert>
 
@@ -97,17 +94,16 @@
             `user_name`,
             `sex`,
             `address`,
-
         </trim>
         values
         <foreach collection="list" item="item" separator =",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-    #{item.id,jdbcType=BIGINT},
-            now(),
-            now(),
-    #{item.userName,jdbcType=VARCHAR},
-    #{item.sex,jdbcType=VARCHAR},
-    #{item.address,jdbcType=VARCHAR},
+                #{item.id,jdbcType=BIGINT},
+                now(),
+                now(),
+                #{item.userName,jdbcType=VARCHAR},
+                #{item.sex,jdbcType=VARCHAR},
+                #{item.address,jdbcType=VARCHAR},
             </trim>
         </foreach>
     </insert>
@@ -190,7 +186,7 @@
         </if>
     </sql>
     <select id="selectCount" resultType="java.lang.Integer">
-        select count(1) from
+        select count(*) from
         <include refid="TableName"/>
         where 1 = 1
         <include refid="page_select_sql" />
@@ -202,7 +198,6 @@
         <include refid="TableName"/>
         where 1 = 1
         <include refid="page_select_sql" />
-
         <if test="pageable.sort != null">
             order by
             <foreach collection="pageable.sort" item="order" separator=",">
