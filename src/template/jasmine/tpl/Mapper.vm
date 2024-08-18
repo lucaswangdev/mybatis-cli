@@ -5,6 +5,8 @@ package $model.repoPkg;
 
 import ${model.entityPkg}.${model.table.className};
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -49,6 +51,11 @@ public interface ${model.table.className}Mapper{
      */
     int insertSelective(@Param("#name(${model.table.className})") ${model.table.className} #name(${model.table.className}));
 
+    /**
+     * batch insert entity
+     * @param list
+     */
+    int insertBatch(@Param("list") List<${model.table.className}> list);
 
     /**
      *##
@@ -76,6 +83,22 @@ public interface ${model.table.className}Mapper{
      */
     int updateByPrimaryKeySelective(@Param("#name(${model.table.className})") ${model.table.className} #name(${model.table.className}));
 
+
+    /**
+    * selectCount
+    * @param #name(${model.table.className})
+
+    * @return
+    */
+    int selectCount(@Param("#name(${model.table.className})") ${model.table.className} #name(${model.table.className}));
+
+    /**
+    * selectPage
+    * @param #name(${model.table.className})
+
+    * @return
+    */
+    List<${model.table.className}> selectPage(@Param("#name(${model.table.className})") ${model.table.className} #name(${model.table.className}), @Param("pageable") Pageable pageable);
 
 /** The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. */
 

@@ -12,5 +12,5 @@
         #end
     #end
 
-    $processor.generate("${model.tplPath}/Mapper.vm", "${model.targetPath}/${table.className}Mapper.xml", true, $repoModel)
+    $processor.generate("${model.tplPath}/Mapper.vm", "${model.targetPath}/${table.className}Mapper.java", true, $repoModel)
 #end

@@ -2,6 +2,7 @@
 
     #set($repoModel = {"table" : $table, "entityPkg":$model.entityPkg, "repoPkg": $model.repoPkg})
 
+
     #foreach($column in $table.columns)##
         #if($column.name == 'is_deleted')
             #set($repoModel.deleteColumn = $column)
@@ -11,5 +12,5 @@
         #end
     #end
 
-    $processor.generate("${model.tplPath}/Repository.vm", "${model.targetPath}/${table.className}Mapper.java", true, $repoModel)
+    $processor.generate("${model.tplPath}/MapperXML.vm", "${model.targetPath}/${table.className}Mapper.xml", true, $repoModel)
 #end

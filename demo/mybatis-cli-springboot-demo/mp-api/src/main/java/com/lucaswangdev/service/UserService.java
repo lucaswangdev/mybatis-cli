@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
     // 更加id查询
-    User selectById(Integer id);
+    User selectById(Long id);
 
     // 插入数据
     Integer insert(User user);
@@ -15,7 +15,7 @@ public interface UserService {
     Integer updateByPrimaryKeySelective(User user);
 
     // 删除数据
-    Integer delete(Integer id);
+    Integer delete(Long id);
 
     // 通过地址查询用户
     List<User> queryByAddress(User user);

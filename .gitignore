@@ -2,3 +2,6 @@ node_modules
 
 demo/mybatis-cli-springboot-demo/.idea
 demo/mybatis-cli-test/.idea
+.idea
+*.log
+*.class

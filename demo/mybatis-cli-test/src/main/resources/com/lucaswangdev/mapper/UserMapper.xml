@@ -6,11 +6,13 @@
     </sql>
 
     <sql id="BaseColumnList">
-     `id`, `user_name`, `sex`, `address`
+     `id`, `gmt_create`, `gmt_modified`, `user_name`, `sex`, `address`
     </sql>
 
     <resultMap id="BaseResultMap" type="com.lucaswangdev.entity.User" autoMapping="false">
-        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
@@ -21,18 +23,21 @@
         <include refid="TableName"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             `id`,
+            `gmt_create`,
+            `gmt_modified`,
             `user_name`,
             `sex`,
             `address`,
 
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{user.id,jdbcType=INTEGER},
-            #{user.userName,jdbcType=VARCHAR},
-            #{user.sex,jdbcType=VARCHAR},
-            #{user.address,jdbcType=VARCHAR},
-
-        </trim>
+            #{user.id,jdbcType=BIGINT},
+                        now(),
+                    now(),
+                #{user.userName,jdbcType=VARCHAR},
+                    #{user.sex,jdbcType=VARCHAR},
+                    #{user.address,jdbcType=VARCHAR},
+                </trim>
     </insert>
 
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="user.id">
@@ -41,6 +46,12 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="user.id != null">
                 `id`,
+            </if>
+            <if test="user.gmtCreate != null">
+                `gmt_create`,
+            </if>
+            <if test="user.gmtModified != null">
+                `gmt_modified`,
             </if>
             <if test="user.userName != null">
                 `user_name`,
@@ -55,7 +66,13 @@
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
             <if test="user.id != null">
-                #{user.id,jdbcType=INTEGER},
+                #{user.id,jdbcType=BIGINT},
+            </if>
+            <if test="user.gmtCreate != null">
+                #{user.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="user.gmtModified != null">
+                #{user.gmtModified,jdbcType=TIMESTAMP},
             </if>
             <if test="user.userName != null">
                 #{user.userName,jdbcType=VARCHAR},
@@ -68,6 +85,31 @@
             </if>
 
         </trim>
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `id`,
+            `gmt_create`,
+            `gmt_modified`,
+            `user_name`,
+            `sex`,
+            `address`,
+
+        </trim>
+        values
+        <foreach collection="list" item="item" separator =",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+    #{item.id,jdbcType=BIGINT},
+            now(),
+            now(),
+    #{item.userName,jdbcType=VARCHAR},
+    #{item.sex,jdbcType=VARCHAR},
+    #{item.address,jdbcType=VARCHAR},
+            </trim>
+        </foreach>
     </insert>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
@@ -92,6 +134,8 @@
         <include refid="TableName"/>
         set
         <trim suffixOverrides=",">
+            `gmt_create` = #{user.gmtCreate,jdbcType=TIMESTAMP},
+            `gmt_modified` = #{user.gmtModified,jdbcType=TIMESTAMP},
             `user_name` = #{user.userName,jdbcType=VARCHAR},
             `sex` = #{user.sex,jdbcType=VARCHAR},
             `address` = #{user.address,jdbcType=VARCHAR},
@@ -105,6 +149,12 @@
         <include refid="TableName"/>
         set
         <trim suffixOverrides=",">
+            <if test="user.gmtCreate != null">
+                `gmt_create` = #{user.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="user.gmtModified != null">
+                `gmt_modified` = #{user.gmtModified,jdbcType=TIMESTAMP},
+            </if>
             <if test="user.userName != null">
                 `user_name` = #{user.userName,jdbcType=VARCHAR},
             </if>
@@ -119,6 +169,58 @@
             `id` = #{user.id}
     </update>
 
-<!-- The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. -->
+    <sql id="page_select_sql">
+        <if test="user.id != null">
+            and `id` = #{user.id,jdbcType=BIGINT}
+        </if>
+        <if test="user.gmtCreate != null">
+            and `gmt_create` = #{user.gmtCreate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="user.gmtModified != null">
+            and `gmt_modified` = #{user.gmtModified,jdbcType=TIMESTAMP}
+        </if>
+        <if test="user.userName != null">
+            and `user_name` = #{user.userName,jdbcType=VARCHAR}
+        </if>
+        <if test="user.sex != null">
+            and `sex` = #{user.sex,jdbcType=VARCHAR}
+        </if>
+        <if test="user.address != null">
+            and `address` = #{user.address,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from
+        <include refid="TableName"/>
+        where 1 = 1
+        <include refid="page_select_sql" />
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where 1 = 1
+        <include refid="page_select_sql" />
 
+        <if test="pageable.sort != null">
+            order by
+            <foreach collection="pageable.sort" item="order" separator=",">
+                <if test="
+                 order.property == 'id'
+                || order.property == 'gmt_create'
+                || order.property == 'gmt_modified'
+                || order.property == 'user_name'
+                || order.property == 'sex'
+                || order.property == 'address'
+                ">
+                    ${order.property} ${order.direction}
+                </if>
+            </foreach>
+        </if>
+        <if test="pageable.offset >= 0 and pageable.pageSize > 0">
+            limit ${pageable.offset}, ${pageable.pageSize}
+        </if>
+    </select>
+<!-- The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. -->
 </mapper>

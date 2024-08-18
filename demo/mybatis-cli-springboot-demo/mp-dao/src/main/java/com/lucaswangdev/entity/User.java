@@ -3,29 +3,39 @@ package com.lucaswangdev.entity;
 import lombok.Data;
 
 /**
-* 
+* 用户表
 * User
 */
 @Data
 public class User {
 
     /**
-    * 
-    * type INT
+    * 主键
+    * type BIGINT
     */
-    private Integer id;
+    private Long id;
     /**
-    * 
+    * 创建时间
+    * type DATETIME
+    */
+    private java.util.Date gmtCreate;
+    /**
+    * 更新时间
+    * type DATETIME
+    */
+    private java.util.Date gmtModified;
+    /**
+    * 用户名
     * type VARCHAR
     */
     private String userName;
     /**
-    * 
+    * 性别
     * type VARCHAR
     */
     private String sex;
     /**
-    * 
+    * 地址
     * type VARCHAR
     */
     private String address;

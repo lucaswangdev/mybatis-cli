@@ -9,15 +9,18 @@
     "mapperXMLPkg":"com/lucaswangdev"
 })
 
+## 设置 entity
 #set($cfg.package = "${cfg.basePkg}.entity")
 #set($cfg.modelPkg = "${cfg.basePkg}.model")
 #set($cfg.targetPath = "${cfg.baseTargetPath}/entity")
 $processor.process("${cfg.tplPath}/Entity.tpl.vm", $cfg)
 
+## 设置 mapper
 #set($cfg.entityPkg = "${cfg.basePkg}.entity")
 #set($cfg.repoPkg = "${cfg.basePkg}.mapper")
 #set($cfg.targetPath = "${cfg.baseTargetPath}/mapper")
-$processor.process("${cfg.tplPath}/Repository.tpl.vm", $cfg)
-
-#set($cfg.targetPath = "../src/main/resources/${cfg.mapperXMLPkg}/mapper")
 $processor.process("${cfg.tplPath}/Mapper.tpl.vm", $cfg)
+
+## 设置 mapper xml
+#set($cfg.targetPath = "../src/main/resources/${cfg.mapperXMLPkg}/mapper")
+$processor.process("${cfg.tplPath}/MapperXML.tpl.vm", $cfg)
