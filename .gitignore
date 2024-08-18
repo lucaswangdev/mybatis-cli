@@ -46,3 +46,5 @@ demo/mybatis-cli-springboot-demo/.idea
 .idea
 *.log
 *.class
+
+.DS_Store
